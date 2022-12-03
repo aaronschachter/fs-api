@@ -1,4 +1,5 @@
 const path = require('path');
+const lodash = require('lodash');
 const fs = require('fs').promises;
 
 const util = require('./util');
@@ -34,7 +35,7 @@ const getDirectoryEntries = async (dirPath) => {
     entries.push(parsed);
   }
 
-  return entries;
+  return lodash.sortBy(entries, 'name');
 };
 
 /**
