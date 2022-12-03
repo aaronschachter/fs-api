@@ -1,40 +1,8 @@
-This [Express](https://expressjs.com/) application provides a REST API to display file information for a given file system path.
+# API 
 
-### Installation
+There is currently a single endpoint to retrieve information for files and directories within specified root directory, as well as its subdirectories.
 
-* Install Node.js and [Docker Compose](https://docs.docker.com/compose/install/)
-* Clone this repository
-* Run `npm install` 
-* Copy the `.env.example` as `.env`
-* In `.env.`, set the `ROOT_DIR` value to the desired file system path 
-
-### Usage
-
-After completing the installation steps, run `docker-compose up` to start the API server locally (running on http://localhost:3000).
-
-```
-$ docker-compose up
-```
-
-#### Shell script
-
-The app can be run from the command line as well:
-
-```
-$ npm run shell
-```
-
-#### Testing
-
-To run unit tests:
-
-```
-npm test
-```
-
-## API Documentation
-
-There is currently a single endpoint to retrieve information for files and directories within specified root directory, as well as its subdirectories:
+## Get Directory Entry/Entries
 
 ```
 GET /:path
@@ -68,11 +36,12 @@ The following example API requests were made when running the app with the `ROOT
 
 #### Root directory contents
 
+If a path is not specified, the Directory Entries in the root directory are returned.
+
+
 ```
 GET /
 ```
-
-If a path is not specified, the Directory Entries in the root directory are returned.
 
 <details>
 <summary>Response</summary>
@@ -169,12 +138,11 @@ If a path is not specified, the Directory Entries in the root directory are retu
 
 #### Subdirectory contents
 
+If a subdirectory path is specified, its Directory Entries are returned.
+
 ```
 GET /src/
 ```
-
-If a subdirectory path is specified, its Directory Entries are returned.
-
 
 <details>
 <summary>Response</summary>
@@ -208,12 +176,11 @@ If a subdirectory path is specified, its Directory Entries are returned.
 
 #### File contents
 
+When a file path is specified, a single Directory Entry is returned.
+
 ```
 GET /src/util.js
 ```
-
-When a file path is specified, a single Directory Entry is returned.
-
 
 <details>
 <summary>Response</summary>
@@ -304,6 +271,8 @@ curl -d '{"uid":501,"name":"letItGo.txt","contents":"The snow glows white on the
 }
 ```
 
+**Note:** The `size` fields is not editable. In order to return the `size` in the API response, the controller will need to read the newly created file before returning it. 
+
 #### Update Directory Entry
 
 ```
@@ -319,7 +288,7 @@ Updates a file or directory that exists in the path.
 | uid         | number  | The file/directory owner                             | Yes                              |
 | contents    | string  | The contents of the file, if not a directory         | Only when `isDirectory` is false |
 
-**Note:** The `isDirectory` field is not editable.
+**Note:** The `isDirectory` and `size` fields are not editable. In order to return an updated `size` in the API response, the controller will need to read the newly updated file before returning it.
 
 #### Delete Directory Entry
 
