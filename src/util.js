@@ -15,7 +15,10 @@ const getDestinationPaths = (destination) => {
   return destination.replace(/\/+$/, '').split('/');
 }
 
+const getRootDirInput = () => process.argv[2];
+
 module.exports = {
   getDestinationPaths,
   getOctalFormat,
+  getRootDirInput,
 };

@@ -13,7 +13,6 @@ const getDirectoryEntry = async (dirPath) => {
 
   return result = {
     isDirectory: stats.isDirectory(),
-    mode,
     name: dirPath.split('/').pop(),
     permissions: util.getOctalFormat(mode),
     size,

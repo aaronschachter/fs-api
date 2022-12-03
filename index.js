@@ -1,10 +1,11 @@
 const express = require('express');
 
+const util = require('./src/util');
+
 const app = express();
 const port = 3000;
 
-// Set the root directory to our command line argument.
-app.locals.rootDir = process.argv[2];
+app.locals.rootDir = util.getRootDirInput();
 
 require('./src/routes')(app);
 
