@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 
 const util = require('./src/util');
@@ -5,7 +7,7 @@ const util = require('./src/util');
 const app = express();
 const port = 3000;
 
-app.locals.rootDir = util.getRootDirInput();
+app.locals.rootDir = util.getRootDirPath();
 
 require('./src/routes')(app);
 

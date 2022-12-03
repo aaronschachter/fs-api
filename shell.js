@@ -5,7 +5,7 @@ const controller = require('./src/controller');
 const util = require('./src/util');
 
 const rl = readline.createInterface(process.stdin, process.stdout);
-const rootDir = util.getRootDirInput();
+const rootDir = util.getRootDirPath();
 
 console.log('Setting root directory to', rootDir);
 
@@ -16,7 +16,7 @@ function promptForPath() {
 
     try {
       console.log('Response:');
-      console.log(await controller.getFileSystemContents(rootDir, destination));
+      console.log(await controller.getFileSystemContents(rootDir, destination.trim()));
 
     } catch (error) {
       console.log('An error occurred:', error.message);

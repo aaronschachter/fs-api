@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 /**
  * @param {number} mode 
  * @returns {string}
@@ -15,10 +17,23 @@ const getDestinationPaths = (destination) => {
   return destination.replace(/\/+$/, '').split('/');
 }
 
-const getRootDirInput = () => process.argv[2];
+/**
+ * Fetches the ROOT_DIR environment variable.
+ * 
+ * @returns {string}
+ */
+const getRootDirPath= () => {
+  const result = process.env.ROOT_DIR;
+
+  if (result) {
+    return result;
+  }
+
+  throw new Error('Could not find ROOT_DIR variable in .env');
+}
 
 module.exports = {
   getDestinationPaths,
   getOctalFormat,
-  getRootDirInput,
+  getRootDirPath,
 };

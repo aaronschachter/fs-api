@@ -2,40 +2,26 @@ This [Express](https://expressjs.com/) application provides a REST API to displa
 
 ### Installation
 
-* Install Node.js
+* Install Node.js and [Docker Compose](https://docs.docker.com/compose/install/)
 * Clone this repository
 * Run `npm install` 
+* Copy the `.env.example` as `.env`
+* In `.env.`, set the `ROOT_DIR` value to the desired file system path 
 
 ### Usage
 
-Run `npm run start (**your path here**)` to start the API server locally.
+After completing the installation steps, run `docker-compose up` to start the API server locally (running on http://localhost:3000).
 
-Example:
 ```
-$ npm run start /Users/aaronschachter/code/
-
-> fs-api@1.0.0 start
-> node index.js /Users/aaronschachter/code/
-
-Running on port 3000 with rootDir /Users/aaronschachter/code/
+$ docker-compose up
 ```
-
-The API will be available on port 3000: http://localhost:3000.
 
 #### Shell script
 
 The app can be run from the command line as well:
 
 ```
-$ npm run shell /Users/aaronschachter/code/
-
-> fs-api@1.0.0 shell
-> node shell.js /Users/aaronschachter/code/
-
-Setting root directory to /Users/aaronschachter/code/
-
-Enter a relative path (or empty string to view root directory):
- 
+$ npm run shell
 ```
 
 #### Testing
@@ -78,11 +64,7 @@ Lists of Directory Entries are sorted by the `name` field, ascending.
 
 ### Examples
 
-The following example API requests were made when running the app with the root directory set to a installed clone of this repository.
-
-```
-$ npm run start /Users/aaronschachter/code/fs-api
-```
+The following example API requests were made when running the app with the `ROOT_DIR`  env variable set to a installed clone of this repository (`ROOT_DIR="/Users/aaronschachter/code/fs-api"`):
 
 #### Root directory contents
 
@@ -97,6 +79,20 @@ If a path is not specified, the Directory Entries in the root directory are retu
 
 ```
 [
+  {
+    isDirectory: false,
+    name: '.env',
+    permissions: '0644',
+    size: 48,
+    uid: 501
+  },
+  {
+    isDirectory: false,
+    name: '.env.example',
+    permissions: '0644',
+    size: 86,
+    uid: 501
+  },
   {
     "isDirectory": true,
     "name": ".git",

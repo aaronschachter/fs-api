@@ -1,0 +1,14 @@
+version: "3"
+services:
+  node:
+    image: "node:18"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+      - type: bind
+        source: ${ROOT_DIR}
+        target: ${ROOT_DIR}
+    ports:
+      - "3000:3000"
+    command: "npm start"
